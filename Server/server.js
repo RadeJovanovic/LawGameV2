@@ -13,15 +13,25 @@ var database = new Nedb({
     autoload: true
 })
 
-app.get('/getSaved', function(req, res) {
+app.get('/retrieveScenes', function(req, res) {
     database.find({}, function(err, data) {
         console.log('I just read stuff from the database')
         res.send(data)
     })
 })
 
-app.post('/saveCurrent', function(req, res) {
+app.post('/saveScene', function(req, res) {
     database.insert({
+            scene: req.body.scene,
+        },
+        function() {
+            console.log('I just wrote to the database')
+            res.end("done")
+        })
+})
+
+app.post('/editScene', function(req, res) {
+    database.update({
             scene: req.body.scene,
         },
         function() {
