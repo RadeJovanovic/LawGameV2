@@ -4,27 +4,18 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script src="node_modules/angular/angular.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/jquery.tubular.1.0.js"></script>	
     <script src="index.js"></script>
 </head>
 
 <body ng-controller="sceneEditController">
-    <div>
-$().ready(function() {
-		$('#wrapper').tubular({videoId: '2_wpOmM1d8w'}); // where idOfYourVideo is the YouTube ID.
-	});
+    
+    <div id="back" style="position: fixed; z-index: -99; width: 100%; height: 100%">
+			<iframe frameborder="0" height="100%" width="100%" src="https://www.youtube.com/embed/x4JKxst4N7U?autoplay=1&controls=0&loop=1&rel=0&showinfo=0&autohide=1&wmode=transparent&hd=1"></iframe>
+		</div>
     <h1>Scene Editor</h1>
-<!--
-    <div style="position: fixed; z-index: -99; width: 100%; height: 100%">
-  <iframe frameborder="0" height="100%" width="100%" 
-    src="https://youtube.com/embed/2_wpOmM1d8w?autoplay=1&controls=0&showinfo=0&autohide=1">
-  </iframe>
-</div>
--->
-        
-    <div>
+    
+    <div id="input">
         <label>Scene Video:
             <input type="text" ng-model="newScene"><br>
         </label>
@@ -35,7 +26,6 @@ $().ready(function() {
     
     <div ng-repeat="s in scenes"> {{s.scene}} </div>
 
-    </div>
 </body>
 
 </html>
