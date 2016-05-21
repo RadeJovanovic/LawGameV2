@@ -6,31 +6,29 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script src="node_modules/angular/angular.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/jquery.tubular.1.0.js"></script>	
     <script src="index.js"></script>
 </head>
     
 
-<body ng-controller="sceneEditController">
-    <video-bg video-id="https://www.youtube.com/watch?v=x4JKxst4N7U"></video-bg>
+<body ng-controller="sceneController">
     <h1>Scene Editor</h1>
-<div ng-app="" ng-controller="SceneController">
+<div ng-app="myApp" ng-controller="SceneController">
     <form class="editform">
-    <label>Scene Number</label> 
-        <input type="text" name="name" ng-model="newScene.number"/><br>
-    <label>Scene URL</label> 
-        <input type="text" name="email" ng-model="newScene.URL"/><br>
-    <label>Scene Question</label> 
-        <input type="text" name="phone" ng-model="newScene.question"/><br>
-         <label>Answer</label> 
-        <input type="text" name="email" ng-model="newScene.answer"/><br>
-         <label>Next Scene</label> 
-        <input type="text" name="email" ng-model="newScene.nextscene"/><br>
-        <br/>
-        <input type="hidden" ng-model="newScene.id" />
-     <input type="button" value="Save" ng-click="saveScene()" class="btn btn-primary"/>
+        <label>Scene Number</label>
+        <input type="text" name="name" ng-model="newScene.number" /><br>
+        <label>Scene URL</label>
+        <input type="text" name="email" ng-model="newScene.URL" /><br>
+        <label>Scene Question</label>
+        <input type="text" name="phone" ng-model="newScene.question" /><br>
+        <label>Answer</label>
+        <input type="text" name="email" ng-model="newScene.answer" /><br>
+        <label>Next Scene</label>
+        <input type="text" name="email" ng-model="newScene.nextscene" /><br>
+        <br>
+        <input type="button" value="Save" ng-click="saveScene()" class="btn btn-primary" />
+        <input type="button" value="Show Updated Scenes" ng-click="getSavedScenes()" class="btn btn-primary" />
     </form>
-         <input type="button" value="Show Updated Scenes" ng-click="getSavedScenes()" class="btn btn-primary"/>
+         
 <table class="table table-striped table-bordered">
 <thead> 
 <tr>
@@ -49,8 +47,8 @@
     <td>{{ scene.answer }}</td>
     <td>{{ scene.nextscene }}</td>
     <td>
-        <a  href="#" ng-click="editThisScene(scene.id)">edit</a> | 
-        <a href="#" ng-click="deleteThisScene(scene.id)">delete</a>
+        <a href="#" ng-click="editThisScene(scene.number)">edit</a>
+        <a href="#" ng-click="deleteThisScene(scene.number)">delete</a>
     </td>
  </tr>
 </tbody>

@@ -2,11 +2,11 @@
 
 var myApp = angular.module('myApp', [])
 
-myApp.controller('sceneEditController', function($scope, sceneUpdate) {
+myApp.controller('sceneController', function($scope, sceneService) {
 
     // These $scope guys will be available in the HTML
    $scope.scenes = [{
-        'id': '0',
+        'number': '0',
         'URL': 'first image source',
         'question': 'first question',
         'answer': 'first answer',
@@ -20,54 +20,84 @@ myApp.controller('sceneEditController', function($scope, sceneUpdate) {
     $scope.newScene.nextscene = 'type nextscene number here';
 
 
-    $scope.saveThisScene = function() {
-        sceneUpdate.saveScene($scope.newScene)
-            .then(saveSuccess, error)
+    $scope.saveThisScene = function() { 
+        sceneUpdate.saveScene($scope.newScene) //need to pass only the details of the new scene
+            .then(saveSuccess, error);
         $scope.newScene = {};
     }
     
-    $scope.editThisScene = function()
-    {
-        sceneUpdate.editScene($scope.newScene)
-            .then(saveSuccess, error)
+    $scope.copyThisScene = function(sceneToEdit) {
+         for (i in $scope.scenes){
+            if ($scope.scenes[i].number == sceneToEdit){
+                $scope.newScene = angular.copy($scope.scene[i]) //This copies the values into the input fields for easier manipulation
+            }
+    }
+        
+    $scope.editThisScene = function(sceneToEdit) {
+        toEdit = sceneToEdit; //maybe do not need this step
+        sceneUpdate.editScene($scope.newScene, toEdit) //need to pass both the details of the new scene and the scene number
+            .then(editSuccess, error);
+        $scope.newScene = {};
     }
     
-    $scope
+    $scope.deleteThisScene = function(sceneToDelete) {
+        toDelete = sceneToDelete; //maybe do not need this step
+        sceneUpdate.deleteScene(toDelete) //only need to pass the details of the scene that is to be deleted
+        .then(deleteSuccess, error);
+    }
 
-    $scope.getSavedScenes = function() {
-        sceneUpdate.getSaved()
+    $scope.loadSavedScenes = function() {
+        sceneUpdate.loadSaved()
             .then(loadSuccess, error)
     }
 
     function saveSuccess(json) {
-        console.log(json)
+        console.log(json);
+    }
+    
+    function editSuccess(json) {
+        console.log(json);
+    }
+    
+    function deteleSuccess() {
+        console.log('Indexjs says Successfully deleted scene'); //Maybe add 'successfully deleted scene number x'
     }
 
     function loadSuccess(json) {
-        $scope.scenes = json.data
+        $scope.scenes = json.data;
     }
 
     function error(err) {
-        console.log(err)
+        console.log(err);
     }
 })
 
-myApp.service('sceneUpdate', function($http) {
+myApp.service('sceneService', function($http) {
 
     var baseUrl = "http://localhost:8080/"
 
     this.saveScene = function(newScene) {
-        var url = baseUrl + "saveScene"
+        var url = baseUrl + "saveScene";
         return $http.post(url, {
             "scene": newScene
         })
     }
 
-    this.getSaved = function() {
-        var url = baseUrl + "getSaved"
-        return $http.get(url)
+    this.editScene = function(toEdit, newScene) {
+        var url = baseUrl + "editScene";
+        return $http.put(url, toEdit, { //Maybe shouldn't use put??
+            //Also not sure whether I need to declare 'toEdit' as I declared 'scene'
+            "scene": newScene
+        })
+    }
+    this.deleteScene = function(toDelete) {
+        var url = baseUrl + "deleteScene";
+        return $http.delete(url, toDelete);
+    }
+
+    this.loadSaved = function() {
+        var url = baseUrl + "loadScenes";
+        return $http.get(url);
     }
 
 })
-
-//myApp.directive('ngBackground', function())
