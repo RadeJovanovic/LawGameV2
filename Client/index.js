@@ -31,6 +31,7 @@ myApp.controller('sceneController', function($scope, sceneService) {
             if ($scope.scenes[i].number == sceneToEdit){
                 $scope.newScene = angular.copy($scope.scene[i]) //This copies the values into the input fields for easier manipulation
             }
+         }
     }
         
     $scope.editThisScene = function(sceneToEdit) {
@@ -90,6 +91,7 @@ myApp.service('sceneService', function($http) {
             "scene": newScene
         })
     }
+    
     this.deleteScene = function(toDelete) {
         var url = baseUrl + "deleteScene";
         return $http.delete(url, toDelete);

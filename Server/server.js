@@ -14,14 +14,14 @@ var database = new Nedb({
 })
 
 app.post('/saveScene', function(req, res) {
-    if (editMode == false){
+//    if (editMode == false){
     database.insert({scene: req.body.scene},
         function() { //maybe change this with function(err,newDoc)
             console.log('I just wrote to the database')
             res.end("done") //Do I need to include this
         })
-    }
-    else 
+//    }
+//    else 
 })
 
 app.put('/editScene', function(req, res) { //Maybe shouldn't use put?
@@ -37,10 +37,8 @@ app.delete('/deleteScene', function(req, res) {
     database.remove({'number': req.body.toDelete},{}, 
         function(){ //maybe change this with 
             console.log('DB says I just deleted a scene')
-            res.end("done")
-        
-    } //Not sure whether I need to define numRemoved or whether NeDB does this automatically.
-    
+            res.end("done") //Not sure whether I need to define numRemoved or whether NeDB does this automatically.
+    })
 })
 
     //Will need to integrate the loading of the scenes into one click instead of having to do another click
