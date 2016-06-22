@@ -15,15 +15,15 @@
 <div ng-app="myApp" ng-controller="sceneController">
     <form class="editform">
         <label>Scene Number</label>
-        <input type="text" name="name" ng-model="newScene.number" /><br>
+        <input type="text" name="number" ng-model="newScene.number" /><br>
         <label>Scene URL</label>
-        <input type="text" name="email" ng-model="newScene.URL" /><br>
+        <input type="text" name="URL" ng-model="newScene.URL" /><br>
         <label>Scene Question</label>
-        <input type="text" name="phone" ng-model="newScene.question" /><br>
+        <input type="text" name="question" ng-model="newScene.question" /><br>
         <label>Answer</label>
-        <input type="text" name="email" ng-model="newScene.answer" /><br>
+        <input type="text" name="answer" ng-model="newScene.answer" /><br>
         <label>Next Scene</label>
-        <input type="text" name="email" ng-model="newScene.nextscene" /><br>
+        <input type="text" name="nextscene" ng-model="newScene.nextscene" /><br>
         <br>
         <input type="button" value="Save" ng-click="saveScene()" class="btn btn-primary" />
         <input type="button" value="Show Updated Scenes" ng-click="getSavedScenes()" class="btn btn-primary" />

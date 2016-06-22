@@ -4,8 +4,7 @@ var myApp = angular.module('myApp', [])
 
 myApp.controller('sceneController', function($scope, sceneService) {
 
-    // These $scope guys will be available in the HTML
-   $scope.scenes = [{
+   $scope.scenes = [{ //initialising dummy scene
         'number': '0',
         'URL': 'first image source',
         'question': 'first question',
@@ -13,6 +12,8 @@ myApp.controller('sceneController', function($scope, sceneService) {
         'nextscene': 'scene after first'
     }];
     
+    
+    $scope.newScene = {};
     $scope.newScene.number = 'type number here';
     $scope.newScene.URL = 'type URL here';
     $scope.newScene.question = 'type question here';
@@ -21,7 +22,7 @@ myApp.controller('sceneController', function($scope, sceneService) {
 
 
     $scope.saveThisScene = function() { 
-        sceneUpdate.saveScene($scope.newScene) //need to pass only the details of the new scene
+        sceneService.saveScene($scope.newScene) //need to pass only the details of the new scene
             .then(saveSuccess, error);
         $scope.newScene = {};
     }
@@ -36,19 +37,19 @@ myApp.controller('sceneController', function($scope, sceneService) {
         
     $scope.editThisScene = function(sceneToEdit) {
         toEdit = sceneToEdit; //maybe do not need this step
-        sceneUpdate.editScene($scope.newScene, toEdit) //need to pass both the details of the new scene and the scene number
+        sceneService.editScene($scope.newScene, toEdit) //need to pass both the details of the new scene and the scene number
             .then(editSuccess, error);
         $scope.newScene = {};
     }
     
     $scope.deleteThisScene = function(sceneToDelete) {
         toDelete = sceneToDelete; //maybe do not need this step
-        sceneUpdate.deleteScene(toDelete) //only need to pass the details of the scene that is to be deleted
+        sceneService.deleteScene(toDelete) //only need to pass the details of the scene that is to be deleted
         .then(deleteSuccess, error);
     }
 
     $scope.loadSavedScenes = function() {
-        sceneUpdate.loadSaved()
+        sceneService.loadSaved()
             .then(loadSuccess, error)
     }
 
