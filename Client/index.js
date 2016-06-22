@@ -61,7 +61,7 @@ myApp.controller('sceneController', function($scope, sceneService) {
         console.log(json);
     }
     
-    function deteleSuccess() {
+    function deleteSuccess() {
         console.log('Indexjs says Successfully deleted scene'); //Maybe add 'successfully deleted scene number x'
     }
 

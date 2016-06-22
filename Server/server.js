@@ -28,7 +28,7 @@ app.put('/editScene', function(req, res) { //Maybe shouldn't use put?
     //Replaces the scene in the first braces with the entry in the second braces
     database.update({number:req.body.toEdit},{scene: req.body.scene}, //ALSO MAYBE NEED TO WRITE OUT EACH SEPERATE FIELD INSERTION SEPERATELY
         function() {
-            console.log('I just edited the database')
+            console.log('Server says I just edited the database')
             res.end("done")
         })
 })
@@ -36,7 +36,7 @@ app.put('/editScene', function(req, res) { //Maybe shouldn't use put?
 app.delete('/deleteScene', function(req, res) {
     database.remove({'number': req.body.toDelete},{}, 
         function(){ //maybe change this with 
-            console.log('DB says I just deleted a scene')
+            console.log('Server says I just deleted a scene')
             res.end("done") //Not sure whether I need to define numRemoved or whether NeDB does this automatically.
     })
 })
@@ -44,7 +44,7 @@ app.delete('/deleteScene', function(req, res) {
     //Will need to integrate the loading of the scenes into one click instead of having to do another click
 app.get('/loadScenes', function(req, res) {
     database.find({}, function(err, allScenes) {
-        console.log('I just read stuff from the database')
+        console.log('Server says I just read stuff from the database')
         res.send(allScenes)
     })
 })
